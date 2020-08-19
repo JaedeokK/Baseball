@@ -9,8 +9,9 @@ p {
   border: 1px solid black;
   position: absolute;
   top: 20%;
+  display: none;
   opacity: 0;
-  transition: all 0.5s linear;
+  transition: opacity 0.5s linear;
 }
 .modal-js #closeBtn {
   position: absolute;

@@ -127,11 +127,18 @@ const inputNumber = () => {
 
 ////////////modal code////////////////////////
 
+//display 옵션에 opacity transition 추가
 const closeRule = () => {
-  modal.style.opacity = "0";
+  modal.classList.remove("opacity");
+  modal.addEventListener("transitionend", () => {
+    modal.classList.remove("show");
+  });
 };
 const showRule = () => {
-  modal.style.opacity = "1";
+  modal.classList.add("show");
+  setTimeout(() => {
+    modal.classList.add("opacity");
+  }, 20);
 };
 
 const handleRule = () => {
@@ -142,7 +149,7 @@ const handleRule = () => {
 //////////////////////////////////////////////
 
 const init = () => {
-  inputNumber();
   handleRule();
+  inputNumber();
 };
 init();
