@@ -110,7 +110,7 @@ const compareNumber = (userNumber) => {
   userNumberBox.innerText = userNumber;
   if (theNumber === "") {
     getRandomInt(INPUT_NUMBER_LENGTH);
-    randomNumberBox.innerText = "???";
+    randomNumberBox.innerText = "?".repeat(INPUT_NUMBER_LENGTH);
   }
   handleCount(INPUT_NUMBER_LENGTH);
   handleAlert(INPUT_NUMBER_LENGTH);
