@@ -9,19 +9,38 @@ const strikePoint = document.querySelector(".strike-point-js"),
 const ruleBtn = document.querySelector(".rule-js"),
   modal = document.querySelector(".modal-js"),
   closeBtn = document.querySelector("#closeBtn");
+const modalContent = document.querySelector("#modal-content-js");
 
 let numberArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 let theNumber = "";
 let outCount = 0;
+const INPUT_NUMBER_LENGTH = 3;
+
+input.placeholder = `${INPUT_NUMBER_LENGTH}자리 숫자를 입력해 주세요`;
+
+modalContent.innerText = `
+입력란에 0에서 9로 이루어진 ${INPUT_NUMBER_LENGTH}자리 숫자를 입력합니다
+\n\
+  Enter키 혹은 click버튼을 누루면 the number란에 \n\
+  0에서 9사이의 서로 다른 수로 이루어진 ${INPUT_NUMBER_LENGTH}자리 수가 무작위로 만들어집니다
+\n\
+  입력한 숫자 각각의 자릿수를 the number와 비교하여 \n\
+  숫자와 위치가 모두 같으면 Strike, \n\
+  숫자는 같지만 위치가 다르면 Ball, \n\
+  같은 숫자가 하나도 없으면 Out이 카운트 됩니다.
+\n\
+  기회는 총 10번 주어지며 \n\
+  주어진 기회를 모두 소진하거나 3 Out이 되면 패배하며 \n\
+  그 전에 숫자를 정확하게 맞춰 ${INPUT_NUMBER_LENGTH} Strike가 되면 승리합니다.`;
 
 const countOpportunity = () => {
   opportunityPoint.innerText = Number(opportunityPoint.innerText) - 1;
 };
 
-const countOut = () => {
+const countOut = (n) => {
   outCount = 0;
 
-  for (let i = 0; i < 3; ++i) {
+  for (let i = 0; i < n; ++i) {
     if (!theNumber.includes(userNumberBox.innerText[i])) {
       outCount += 1;
     }
@@ -31,9 +50,9 @@ const countOut = () => {
   }
 };
 
-const countBall = () => {
+const countBall = (n) => {
   ballPoint.innerText = 0;
-  for (let i = 0; i < 3; ++i) {
+  for (let i = 0; i < n; ++i) {
     if (theNumber.includes(userNumberBox.innerText[i])) {
       if (userNumberBox.innerText[i] !== theNumber[i]) {
         ballPoint.innerText = Number(ballPoint.innerText) + 1;
@@ -42,20 +61,20 @@ const countBall = () => {
   }
 };
 
-const countStrike = () => {
+const countStrike = (n) => {
   strikePoint.innerText = 0;
-  for (let i = 0; i < 3; ++i) {
+  for (let i = 0; i < n; ++i) {
     if (userNumberBox.innerText[i] === theNumber[i]) {
       strikePoint.innerText = Number(strikePoint.innerText) + 1;
     }
   }
 };
 
-const getRandomInt = () => {
+const getRandomInt = (n) => {
   theNumber = "";
   numberArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-  for (i = 0; i < 3; ++i) {
+  for (i = 0; i < n; ++i) {
     const randomIndex = Math.floor(Math.random() * numberArr.length);
     const randomNumber = numberArr[randomIndex];
     numberArr = numberArr.filter((item) => item !== randomNumber);
@@ -63,12 +82,12 @@ const getRandomInt = () => {
     theNumber += randomNumber;
   }
   if (theNumber < 100) {
-    getRandomInt();
+    getRandomInt(INPUT_NUMBER_LENGTH);
   }
 };
 
-const handleAlert = () => {
-  if (Number(strikePoint.innerText) === 3) {
+const handleAlert = (n) => {
+  if (Number(strikePoint.innerText) === n) {
     alert("🎉🎉이겼습니다!!🎉🎉");
     location.reload();
   } else if (
@@ -80,35 +99,35 @@ const handleAlert = () => {
   }
 };
 
-const handleCount = () => {
-  countStrike();
-  countBall();
-  countOut();
-  countOpportunity();
+const handleCount = (n) => {
+  countStrike(n);
+  countBall(n);
+  countOut(n);
+  countOpportunity(n);
 };
 
 const compareNumber = (userNumber) => {
   userNumberBox.innerText = userNumber;
   if (theNumber === "") {
-    getRandomInt();
+    getRandomInt(INPUT_NUMBER_LENGTH);
     randomNumberBox.innerText = "???";
   }
-  handleCount();
-  handleAlert();
+  handleCount(INPUT_NUMBER_LENGTH);
+  handleAlert(INPUT_NUMBER_LENGTH);
 };
 
-const checkDigit = () => {
+const checkDigit = (n) => {
   const value = input.value;
-  if (value.length === 3) {
+  if (value.length === n) {
     compareNumber(value);
   } else {
-    alert("3자리 숫자가 아닙니다!");
+    alert(`${n}자리 숫자가 아닙니다!`);
   }
 };
 
 const handleSubmit = (event) => {
   event.preventDefault();
-  checkDigit();
+  checkDigit(INPUT_NUMBER_LENGTH);
 };
 
 const inputNumber = () => {

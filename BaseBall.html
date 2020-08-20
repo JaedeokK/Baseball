@@ -22,12 +22,7 @@
       </div>
       <h1 class="title">Base Ball</h1>
       <form action="" class="form form-js">
-        <input
-          type="number"
-          placeholder="3자리 숫자를 입력해주세요"
-          class="input input-js"
-          required
-        />
+        <input type="number" class="input input-js" required />
         <button class="submit-button">click</button>
       </form>
       <div class="number-box">
@@ -63,24 +58,7 @@
       <i class="fas fa-times" id="closeBtn"></i>
       <h2>Base Ball</h2>
       <h4>규칙설명</h4>
-      <p>
-        입력란에 0에서 9로 이루어진 3자리 숫자를 입력합니다
-      </p>
-      <p>
-        Enter키 혹은 click버튼을 누루면 the number란에 <br />
-        0에서 9사이의 서로 다른 수로 이루어진 3자리 수가 무작위로 만들어집니다
-      </p>
-      <p>
-        입력한 숫자 각각의 자릿수를 the number와 비교하여 <br />
-        숫자와 위치가 모두 같으면 Strike, <br />
-        숫자는 같지만 위치가 다르면 Ball, <br />
-        같은 숫자가 하나도 없으면 Out이 카운트 됩니다.
-      </p>
-      <p>
-        기회는 총 10번 주어지며 <br />
-        주어진 기회를 모두 소진하거나 3 Out이 되면 패배하며 <br />
-        그 전에 숫자를 정확하게 맞춰 3 Strike가 되면 승리합니다.
-      </p>
+      <p id="modal-content-js"></p>
     </div>
     <script src="BaseBall.js"></script>
   </body>

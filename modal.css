@@ -15,6 +15,7 @@ p {
 }
 .modal-js #closeBtn {
   position: absolute;
-  right: 25px;
+  top: 15px;
+  right: 20px;
   cursor: pointer;
 }
